@@ -34,7 +34,7 @@ const cwd = process.cwd();
     console.log("childFilesIgnore", (await Array.fromAsync(childFilesIgnore, dirent => {
         return path.relative(cwd, path.join(dirent.parentPath, dirent.name))
     })));
-    console.log("childFilesIgnoreWithGlob", (await Array.fromAsync(childFilesIgnore, dirent => {
+    console.log("childFilesIgnoreWithGlob", (await Array.fromAsync(childFilesIgnoreWithGlob, dirent => {
         return path.relative(cwd, path.join(dirent.parentPath, dirent.name))
     })));
 }
