@@ -1,3 +1,8 @@
+# Glob Examples
+
+- Node.js [fs/promises glob](https://nodejs.org/api/fs.html#fspromisesglobpattern-options)
+- https://github.com/isaacs/node-glob
+- https://github.com/mrmlnc/fast-glob
 
 ```bash
 $ node index.mjs
