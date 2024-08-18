@@ -9,6 +9,12 @@ const cwd = process.cwd();
     const txtFiles = fsPromisesGlob("fixtures/**/*.txt");
     // root file path
     const rootFilePath = fsPromisesGlob("fixtures/root/index.txt");
+    const absoluteRootFilePath = await fsPromisesGlob([
+        path.join(cwd, "fixtures/root/index.txt"),
+        path.join(cwd, "fixtures/root/child-x/child-x-1.txt"),
+        // not found
+        path.join(cwd, "fixtures/root/not-found.txt")
+    ]);
     // child files
     const childFiles = fsPromisesGlob("fixtures/root/child-*/**/*");
     // ignore child-y
@@ -30,6 +36,7 @@ const cwd = process.cwd();
     console.log("allFiles", await Array.fromAsync(allFiles));
     console.log("txtFiles", await Array.fromAsync(txtFiles));
     console.log("rootFilePath", await Array.fromAsync(rootFilePath));
+    console.log("absoluteRootFilePath", await Array.fromAsync(absoluteRootFilePath));
     console.log("childFiles", await Array.fromAsync(childFiles));
     console.log("childFilesIgnore", (await Array.fromAsync(childFilesIgnore, dirent => {
         return path.relative(cwd, path.join(dirent.parentPath, dirent.name))

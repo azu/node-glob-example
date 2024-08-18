@@ -1,5 +1,7 @@
 import fastGlob from "fast-glob";
+import path from "node:path";
 
+const cwd = process.cwd();
 // fast-glob
 {
     // all
@@ -8,6 +10,12 @@ import fastGlob from "fast-glob";
     const txtFiles = await fastGlob("fixtures/**/*.txt");
     // root file path
     const rootFilePath = await fastGlob("fixtures/root/index.txt");
+    const absoluteRootFilePath = await fastGlob([
+        path.join(cwd, "fixtures/root/index.txt"),
+        path.join(cwd, "fixtures/root/child-x/child-x-1.txt"),
+        // not found
+        path.join(cwd, "fixtures/root/not-found.txt")
+    ]);
     // child files
     const childFiles = await fastGlob("fixtures/root/child-*/**/*");
     // ignore child-y
@@ -20,6 +28,7 @@ import fastGlob from "fast-glob";
     console.log("allFiles", allFiles);
     console.log("txtFiles", txtFiles);
     console.log("rootFilePath", rootFilePath);
+    console.log("absoluteRootFilePath", absoluteRootFilePath);
     console.log("childFiles", childFiles);
     console.log("childFilesIgnore", childFilesIgnore);
     console.log("childFilesIgnoreWithGlob", childFilesIgnoreWithGlob);
